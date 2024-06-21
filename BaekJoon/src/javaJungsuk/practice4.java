@@ -1,6 +1,7 @@
 package javaJungsuk;
 
 import java.io.*;
+import java.util.regex.Pattern;
 
 public class practice4 {
 
@@ -68,7 +69,7 @@ public class practice4 {
     System.out.println("char형 변수 ch가 공백에나 탭이 아닐때 true인 조건식");
     System.out.printf("문자 하나 입력 : ");
     char ch = br.readLine().charAt(0);
-    boolean b = (ch != ' ' || ch != 9);
+    boolean b = (ch != ' ' && ch != '\t');
     System.out.printf("char ch가 %c 일때 boolean b는 %b\n", ch, b);
   }
 
@@ -143,10 +144,10 @@ public class practice4 {
    * 연습문제 4-2
    */
   public void practice4_2() {
-    System.out.println("1부터 20까지의 정수 중에서 2 또는 3의 배수가 아닌 수의 총합을 구하시오.");
+    System.out.println("1부터 20까지의 정수 중에서 2 또는 3의 배수가 아닌 수의 총합을 구하시오."); //73!
     int sum = 0;
     for (int n = 1; n <= 20; n++) {
-      if (n % 2 != 0 || n % 3 != 0) {
+      if (n % 2 != 0 && n % 3 != 0) {
         System.out.printf("%d ", n);
         sum += n;
       }
@@ -160,30 +161,31 @@ public class practice4 {
   public void practice4_3() {
     System.out.println("1+(1+2)+(1+2+3)+(1+2+3+4)+...+(1+2+3+...+10)의 결과를 계산하시오");
     int sum = 0;
+    int result = 0;
     for (int n = 1; n <= 10; n++) {
-      sum = sum + n;
+      sum += n;
+      result += sum;
     }
-    System.out.println("\n총합은 : " + sum);
+    System.out.println("\n총합은 : " + result);
   }
 
   /**
    * 연습문제 4-4
    */
   public void practice4_4() {
-    System.out.println("1+(-2)+3+(-4)+... ㅗ가 같은 식으로 계속 더해 나갔을때 몇까지 더해야 총합니 100이상 되는지 구하시오");
+    System.out.println("1+(-2)+3+(-4)+... 가 같은 식으로 계속 더해 나갔을때 몇까지 더해야 총합이 100이상 되는지 구하시오");
     int cnt = 1;
     int sum = 0;
     while (sum < 100) {
+      if (cnt % 2 == 0) {
+        sum += -(cnt);
+      } else {
+        sum += cnt;
+      }
 
-      sum += cnt;
-      cnt = ++cnt * -1;
+      cnt++;
     }
-    if (cnt < 0) {
-      cnt *= -1;
-    }
-
     System.out.println("결과값은 : " + cnt);
-
   }
 
   /**
@@ -209,13 +211,15 @@ public class practice4 {
    */
   public void practice4_6() {
     System.out.println("두 개의 주사위를 던졌을 때, 눈의 합이 6이 되는 모든 경우의 수를 출력하는 프로그램을 작성하시오.");
+    int cnt = 0;
     for (int y = 1; y <= 6; y++) {
       for (int x = 1; x <= 6; x++) {
         if ((x + y) == 6) {
           System.out.printf("%d : %d   ", x, y);
+          cnt++;
         }
       }
-      System.out.println();
+      System.out.println("모은 경우의 수는 " + cnt);
     }
   }
 
@@ -239,8 +243,8 @@ public class practice4 {
    * 연습문제 4-8
    */
   public void practice4_8() {
-    System.out.println("Math.random()을 이용해서 1부터 6사이의 임의 정수를 변수 valuew에 저장하는 코드를 완성하시오.");
-    int value = (int) (Math.random() * 5) + 1;
+    System.out.println("Math.random()을 이용해서 1부터 6사이의 임의 정수를 변수 value에 저장하는 코드를 완성하시오.");
+    int value = (int) (Math.random() * 6) + 1;
     System.out.println("value : " + value);
   }
 
@@ -273,27 +277,38 @@ public class practice4 {
    */
   public void practice4_10() throws IOException {
     System.out.println("1과 100 사이의 값을 반복적으로 입력해서 검퓨터가 생각한 값을 맞히면 게임 끝");
-    int answer = (int) (Math.random() * 99) + 1;
-    int input = 0;
+    int answer = (int) (Math.random() * 100) + 1;
+    String input = "";
+    int num = 0;
     int count = 0;
 
     do {
       count++;
       System.out.print("1 과 100 사이의 값을 입력하세요 : ");
-      input = Integer.parseInt(br.readLine());
-
-      if (answer > input) {
-        System.out.println("더 큰 수를 입력하세요.");
-      } else if (answer < input) {
-        System.out.println("더 작은 수를 입력하세요");
+      input = br.readLine();
+      if (isNumber(input)) {
+        num = Integer.parseInt(input);
+        if (num > 100) {
+          System.out.println("범위가 벗어났습니다.");
+        } else if (answer > num) {
+          System.out.println("더 큰 수를 입력하세요.");
+        } else if (answer < num) {
+          System.out.println("더 작은 수를 입력하세요");
+        } else {
+          System.out.println("맞혔습니다.");
+          System.out.printf("시도 횟수는 %d 번 입니다.\n", count);
+          break;
+        }
       } else {
-        System.out.println("맞혔습니다.");
-        System.out.printf("시도 횟수는 %d 번 입니다.\n", count);
-        break;
+        System.out.println("잘못 입력하셨습니다.");
       }
 
     } while (true);
+  }
 
+  /** 예외처리 */
+  public static boolean isNumber(String input) {
+    return Pattern.matches("^[0-9]*$", input);
   }
 
 }
