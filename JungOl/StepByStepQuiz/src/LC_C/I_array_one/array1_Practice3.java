@@ -1,4 +1,4 @@
-package LC_C.I_array_one;
+package LC_C.i_array_one;
 import java.io.*;
 import java.util.StringTokenizer;
 
