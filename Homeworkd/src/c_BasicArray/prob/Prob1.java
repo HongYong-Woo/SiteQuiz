@@ -28,7 +28,7 @@ public class Prob1 {
 		System.out.println("이 배열을 매개변수로 받아서 배열의 내용을 홀수, 짝수 인지 구분하여 홀수의 합과 짝수의 합을 출력하시오.");
 		int oddSum=0, evenSum=0;
 		for(int n=0; n<arrayInt.length ; n++) {
-			if(arrayInt[n] ==0)
+			if(arrayInt[n]%2 ==0)
 				evenSum += arrayInt[n];
 			else
 				oddSum += arrayInt[n];
