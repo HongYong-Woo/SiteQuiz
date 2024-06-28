@@ -185,10 +185,10 @@ public class TestMain {
 
 
 
-  public static Account[] BankApplication = new Account[100];
+  //public static Account[] BankApplication = new Account[100]; //statice 안해도 됨
   /** 클래스문제20 */
   public void Prob20() throws IOException{
-
+    Account[] BankApplication = new Account[100];
     int select =0;
     while(select !=5) {
       Prob20Menu();
