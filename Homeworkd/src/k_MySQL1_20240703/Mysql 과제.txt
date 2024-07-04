@@ -1,0 +1,8 @@
+요구 사항
+JDBCEx class 리펙토링
+
+1. Member 클래스 생성
+
+2. JDBCEx class 메서드에서 중복 기능을 뽑아서 abstract MemberDB 클래스 생성
+
+3. JDBCEx 클래스가 MemberDB의 기능을 사용 할 수 있도록 구성 및 구현하기
