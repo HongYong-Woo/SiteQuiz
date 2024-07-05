@@ -9,10 +9,9 @@ public class JdbcEx extends MemberDB{
 //회원의 정보를 사용자 받는 기능  (static 메소드로)
     JdbcEx jdbc = new JdbcEx();
 
-
-    jdbc.state();
-    //Member 클래스(VO)
-   // Member member = new Member(4,"QWE", "Police");
+    jdbc.menuSelect();
+//    Member 클래스(VO)
+//    Member member = new Member(4,"QWE", "Police");
 //    memberInsert(member, jdbc.login(););// Member member
 //    memberSearch();
 //    System.out.println("==회원 정보수정 후 조회===");
@@ -20,9 +19,9 @@ public class JdbcEx extends MemberDB{
 //    member.setJob("student");
 //    memberUpdate(member, jdbc.login());
 //    memberSearch();
-   // System.out.println("==회원 정보삭제 후 조회===");
-   // memberDelete(member, jdbc.login());
-   // memberSearch(jdbc.login());
+//    System.out.println("==회원 정보삭제 후 조회===");
+//    memberDelete(member, jdbc.login());
+//    memberSearch(jdbc.login());
   }
 
   /**
@@ -163,7 +162,7 @@ public class JdbcEx extends MemberDB{
   }
 
   @Override
-  public void state() throws IOException {
+  public void menuSelect() throws IOException {
     int select =0;
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     JdbcEx jdbc = new JdbcEx();
