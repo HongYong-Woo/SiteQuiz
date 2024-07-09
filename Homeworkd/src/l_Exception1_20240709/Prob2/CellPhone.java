@@ -20,14 +20,14 @@ public class CellPhone {
   public void call (int time) {
     try {
       if(time<0)
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("통화 시간 입력 오류");
       System.out.println("통화 시간 : " + time + "분");
       this.battery -= time* 0.5f;
 
       if(this.battery <0)
         this.battery =0;
     } catch (IllegalArgumentException e) {
-      System.out.println("통화 시간 입력 오류");
+      System.out.println(e.getMessage());
     }
   }
   /**
