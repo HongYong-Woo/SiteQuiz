@@ -191,34 +191,41 @@ public class TestMain {
     Account[] BankApplication = new Account[100];
     int select =0;
     while(select !=5) {
-      Prob20Menu();
-      System.out.printf("선택> ");
-      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-      select = Integer.parseInt(br.readLine());
-      switch (select) {
-        case 1:
-          for(int n=0; n<BankApplication.length ; n++) {
-            if(BankApplication[n] == null) {
-              BankApplication[n] = AccountDAO.createAccount();
-              break;
+
+      try {
+        Prob20Menu();
+        System.out.printf("선택> ");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        select = Integer.parseInt(br.readLine());
+        switch (select) {
+          case 1:
+            for(int n=0; n<BankApplication.length ; n++) {
+              if(BankApplication[n] == null) {
+                BankApplication[n] = AccountDAO.createAccount();
+                break;
+              }
             }
-          }
-          break;
-        case 2:
-          AccountDAO.listAccount(BankApplication);
-          break;
-        case 3:
-          AccountDAO.insertAccount(BankApplication);
-          break;
-        case 4:
-          AccountDAO.removeAccount(BankApplication);
-          break;
-        case 5:
-          System.out.println("프로그램 종료");
-          break;
-        default:
-          System.out.println("잘못 입력하셨습니다.");
-          break;
+            break;
+          case 2:
+            AccountDAO.listAccount(BankApplication);
+            break;
+          case 3:
+            AccountDAO.insertAccount(BankApplication);
+            break;
+          case 4:
+            AccountDAO.removeAccount(BankApplication);
+            break;
+          case 5:
+            System.out.println("프로그램 종료");
+            break;
+          default:
+            System.out.println("범위를 벗어났습니다.");
+            break;
+        }
+      } catch (NumberFormatException e) {
+        System.out.println("잘못 입력하셨습니다. 숫자를 입력해주세요");
+      } catch (IOException e) {
+        throw new RuntimeException(e);
       }
     }
   }
