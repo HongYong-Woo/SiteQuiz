@@ -5,6 +5,14 @@ import java.util.ArrayList;
 public class BoardManager extends BoardDAO{
 
   public static final BoardManager instance = new BoardManager();
+
+  private BoardManager() {
+  }
+
+  public static BoardManager getInstance() {
+    return  instance;
+  }
+
   @Override
   public void deleteBoard() {
     return;
