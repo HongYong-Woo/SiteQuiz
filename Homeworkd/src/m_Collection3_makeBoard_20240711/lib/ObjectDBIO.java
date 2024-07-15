@@ -32,7 +32,7 @@ public abstract class ObjectDBIO {
   }
 
   //DB DisConnection
-  private boolean close() {
+  protected boolean close() {
     try {
       connection.close();
       return true;

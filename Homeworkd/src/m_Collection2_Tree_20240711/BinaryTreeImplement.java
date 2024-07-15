@@ -8,7 +8,7 @@ public class BinaryTreeImplement {
 
     public TreeNode left = null;
     public TreeNode right = null;
-    public TreeNode root = null;
+    public TreeNode parent = null;
     int data;
 
     public TreeNode(int data) {
@@ -28,7 +28,7 @@ public class BinaryTreeImplement {
             findNode = findNode.left;
           } else {
             findNode.left = new TreeNode(data);
-            findNode.left.root = findNode;
+            findNode.left.parent = findNode;
             break;
           }
         } else {  //case 2-2 : 현재 Node의 오른쪽에 Node가 들어가야 할떄
@@ -36,7 +36,7 @@ public class BinaryTreeImplement {
             findNode = findNode.right;
           } else {
             findNode.right = new TreeNode(data);
-            findNode.right.root = findNode;
+            findNode.right.parent = findNode;
             break;
           }
         }
