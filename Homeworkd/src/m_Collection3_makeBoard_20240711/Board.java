@@ -8,13 +8,15 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+
 public class Board {
   private int bno;
   private String btitle;
   private String bcontent;
   private String bwriter;
   private Date date;
+
+  Board(){}
 
   Board(String title, String content, String writer) {
     this.btitle = title;
@@ -28,5 +30,12 @@ public class Board {
     this.bwriter = writer;
   }
 
-
+  @Override
+  public String toString() {
+      return  "번호 : " + bno +
+        "\n제목 : " + btitle +
+        "\n내용 : " + bcontent +
+        "\n작성자 : " + bwriter +
+        "\n날짜 : " + date ;
+  }
 }

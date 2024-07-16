@@ -64,5 +64,15 @@ public abstract class ObjectDBIO {
     }
   }
 
+  protected void resetIndex() {
+    try {
+      open();
+      String query = "ALTER TABLE board AUTO_INCREMENT = ";
+      PreparedStatement psmt = connection.prepareStatement(query);
+      psmt.executeUpdate();
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+    }
+  }
 
 }

@@ -18,27 +18,27 @@ public class BoardManager extends BoardDAO{
   }
 
   @Override
-  public void deleteBoard() {
-    return;
+  public void deleteBoard(int bno) {
+    super.deleteBoard(bno);
   }
 
   @Override
   public void clearBoard() {
-
+    super.clearBoard();
   }
 
   @Override
-  public Board searchBoard() {
-    return null;
+  public Board searchBoard(int no) {
+    return super.searchBoard(no);
   }
 
   @Override
   public ArrayList<Board> listAllBoard() {
-    return null;
+    return super.listAllBoard();
   }
 
   @Override
-  public void updateBoard() {
-
+  public void updateBoard(Board board) {
+    super.updateBoard(board);
   }
 }

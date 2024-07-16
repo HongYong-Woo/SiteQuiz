@@ -3,6 +3,7 @@ package m_Collection3_makeBoard_20240711;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import m_Collection3_makeBoard_20240711.interfaces.BoardIO;
 import m_Collection3_makeBoard_20240711.lib.ObjectDBIO;
 
@@ -26,24 +27,46 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
   }
 
   @Override
-  public void deleteBoard() {
+  public void deleteBoard(int no) {
+    String query = "DELETE FROM board WHERE no = " + no;
+    super.excute(query);
+    super.close();
 
   }
 
   @Override
   public void clearBoard() {
-
+    String query = "DELETE FROM board";
+    super.excute(query);
+    super.close();
   }
 
   @Override
-  public Board searchBoard() {
-    return null;
+  public Board searchBoard(int no) {
+    String query = "SELECT * FROM board WHERE no = " + no;
+    ResultSet rs = null;
+    Board board = new Board();
+    rs = super.excute(query, rs);
+    try {
+      while (rs.next()) {
+        board.setBno(rs.getInt(1));
+        board.setBtitle(rs.getString("title"));
+        board.setBcontent(rs.getString("content"));
+        board.setBwriter(rs.getString("writer"));
+        //String date = rs.getString("date");
+      }
+      rs.close();
+      super.close();
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+    }
+    return board;
   }
 
   @Override
   public ArrayList<Board> listAllBoard() {
     String query = "SELECT * FROM board";
-    ResultSet rs =null;
+    ResultSet rs = null;
     ArrayList<Board> templist = new ArrayList<>();
     rs = super.excute(query, rs);
     try {
@@ -55,6 +78,8 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
         String date = rs.getString("date");
         templist.add(new Board(no, title, content, writer));
       }
+      rs.close();
+      super.close();
     } catch (SQLException e) {
       System.err.println(e.getMessage());
     }
@@ -62,9 +87,22 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
   }
 
   @Override
-  public void updateBoard() {
+  public void updateBoard(Board board) {
+    String query = "UPDATE board SET title = '" + board.getBtitle()
+        + "', content = '" + board.getBcontent()
+        + "', writer = '" + board.getBwriter() + "' "
+        + "WHERE no = " + board.getBno();
+    ResultSet rs = null;
+    super.excute(query);
+    super.close();
 
   }
 
-  public void printBoard() {}
+  public void printBoard() {
+    listAllBoard().forEach(no -> {
+      System.out.printf("%-5d%-10s%-10s%-10s\n", no.getBno(), no.getBwriter(), no.getDate(),
+          no.getBtitle());
+    });
+
+  }
 }
