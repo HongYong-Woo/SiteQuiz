@@ -66,9 +66,15 @@ public abstract class ObjectDBIO {
 
   protected void resetIndex() {
     try {
-      open();
-      String query = "ALTER TABLE board AUTO_INCREMENT = ";
+      //open();
+      String query = "ALTER TABLE board AUTO_INCREMENT = 1";
       PreparedStatement psmt = connection.prepareStatement(query);
+      psmt.executeUpdate();
+      query = "SET @COUNT = 0";
+      psmt = connection.prepareStatement(query);
+      psmt.executeUpdate();
+      query = "UPDATE board SET no = @COUNT:=@COUNT +1";
+      psmt = connection.prepareStatement(query);
       psmt.executeUpdate();
     } catch (SQLException e) {
       System.err.println(e.getMessage());

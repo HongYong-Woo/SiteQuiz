@@ -30,6 +30,7 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
   public void deleteBoard(int no) {
     String query = "DELETE FROM board WHERE no = " + no;
     super.excute(query);
+    super.resetIndex();
     super.close();
 
   }
@@ -38,6 +39,7 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
   public void clearBoard() {
     String query = "DELETE FROM board";
     super.excute(query);
+    super.resetIndex();
     super.close();
   }
 
