@@ -25,6 +25,7 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
         date + "' )";
 
     super.excute(query);
+    super.resetIndex();
     super.close();
   }
 
@@ -39,7 +40,7 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
 
   @Override
   public void clearBoard() {
-    String query = "DELETE FROM board";
+    String query = "TRUNCATE TABLE board";
     super.excute(query);
     super.resetIndex();
     super.close();
@@ -106,7 +107,7 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
 
   public void printBoard() {
     listAllBoard().forEach(no -> {
-      System.out.printf("%d%10s%20s%30s\n", no.getBno(), no.getBwriter(), no.getStringDate(),
+      System.out.printf("%d%10s%20s%20s\n", no.getBno(), no.getBwriter(), no.getStringDate(),
           no.getBtitle());
     });
 
