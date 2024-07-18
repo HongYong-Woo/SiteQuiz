@@ -1,6 +1,7 @@
 package m_Collection3_makeBoard_20240711;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,20 +15,32 @@ public class Board {
   private String btitle;
   private String bcontent;
   private String bwriter;
-  private Date date;
+  private LocalDate date;
+  private String stringDate;
 
   Board(){}
 
+  //생성, 업데이트에 쓰임
   Board(String title, String content, String writer) {
     this.btitle = title;
     this.bcontent = content;
     this.bwriter = writer;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+    this.date = LocalDate.now();
+    stringDate = date.format(formatter);
   }
-  Board(int no, String title, String content, String writer) {
+  
+  //조회에 쓰임
+  Board(int no, String title, String content, String writer, LocalDate date) {
     this.bno = no;
     this.btitle = title;
     this.bcontent = content;
     this.bwriter = writer;
+    this.date = date;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+    this.date = LocalDate.now();
+    stringDate = date.format(formatter);
+
   }
 
   @Override

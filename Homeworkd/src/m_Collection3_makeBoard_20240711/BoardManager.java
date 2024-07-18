@@ -38,7 +38,7 @@ public class BoardManager extends BoardDAO{
   }
 
   @Override
-  public void updateBoard(Board board) {
-    super.updateBoard(board);
+  public void updateBoard(int no, Board board) {
+    super.updateBoard(no, board);
   }
 }

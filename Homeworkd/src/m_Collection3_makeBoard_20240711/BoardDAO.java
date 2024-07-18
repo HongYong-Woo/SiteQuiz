@@ -1,7 +1,9 @@
 package m_Collection3_makeBoard_20240711;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import m_Collection3_makeBoard_20240711.interfaces.BoardIO;
@@ -14,7 +16,7 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
     String title = board.getBtitle();
     String content = board.getBcontent();
     String writer = board.getBwriter();
-    String date = "2024.07.15";
+    String date = board.getStringDate();
 
     String query = "INSERT INTO board(title, content, writer, date) VALUES ( '" +
         title + "', '" +
@@ -55,7 +57,8 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
         board.setBtitle(rs.getString("title"));
         board.setBcontent(rs.getString("content"));
         board.setBwriter(rs.getString("writer"));
-        //String date = rs.getString("date");
+        Date date = rs.getDate("date");
+        board.setDate(date.toLocalDate());
       }
       rs.close();
       super.close();
@@ -77,8 +80,9 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
         String title = rs.getString("title");
         String content = rs.getString("content");
         String writer = rs.getString("writer");
-        String date = rs.getString("date");
-        templist.add(new Board(no, title, content, writer));
+        Date date = rs.getDate("date");
+
+        templist.add(new Board(no, title, content, writer, date.toLocalDate()));
       }
       rs.close();
       super.close();
@@ -89,11 +93,11 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
   }
 
   @Override
-  public void updateBoard(Board board) {
+  public void updateBoard(int no, Board board) {
     String query = "UPDATE board SET title = '" + board.getBtitle()
         + "', content = '" + board.getBcontent()
         + "', writer = '" + board.getBwriter() + "' "
-        + "WHERE no = " + board.getBno();
+        + "WHERE no = " + no;
     ResultSet rs = null;
     super.excute(query);
     super.close();
@@ -102,7 +106,7 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
 
   public void printBoard() {
     listAllBoard().forEach(no -> {
-      System.out.printf("%-5d%-10s%-10s%-10s\n", no.getBno(), no.getBwriter(), no.getDate(),
+      System.out.printf("%d%10s%20s%30s\n", no.getBno(), no.getBwriter(), no.getStringDate(),
           no.getBtitle());
     });
 

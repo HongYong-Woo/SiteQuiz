@@ -4,5 +4,5 @@ import m_Collection3_makeBoard_20240711.Board;
 
 public interface UpdateBoard {
 
-  public void updateBoard(Board board);
+  public void updateBoard(int no, Board board);
 }

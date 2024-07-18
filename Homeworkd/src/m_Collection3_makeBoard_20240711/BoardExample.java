@@ -115,7 +115,7 @@ public class BoardExample {
       try {
         switch (Integer.parseInt(br.readLine())) {
           case 1 -> {
-            BoardManager.getInstance().updateBoard(new Board(bno, title, content, writer));
+            BoardManager.getInstance().updateBoard(bno,new Board(title, content, writer));
             isOn = false;
           }
           case 2 -> isOn = false;
