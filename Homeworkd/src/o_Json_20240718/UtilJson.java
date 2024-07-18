@@ -1,5 +1,7 @@
 package o_Json_20240718;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -135,7 +137,14 @@ public class UtilJson {
 
 
 public static String jsonToString(JSONObject jsonObject) {
-  return jsonObject.toString();
+  Gson gson2 = new GsonBuilder().
+      disableHtmlEscaping().
+      setPrettyPrinting().
+      serializeNulls().
+      create();
+
+
+  return gson2.toJson(jsonObject);
 }
 
 
