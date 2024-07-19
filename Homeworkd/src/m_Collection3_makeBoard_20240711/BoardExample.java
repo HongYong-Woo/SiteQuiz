@@ -14,7 +14,7 @@ public class BoardExample {
 
 
   }
-
+  /**메인 메뉴 */
   public void mainMenu(){
     int selectMenu = 0;
     boolean isOn = true;
@@ -51,6 +51,7 @@ public class BoardExample {
     }
   }
 
+  /** 생성 메뉴 */
   public void createMenu(){
     System.out.println("[새 게시물 입력]");
 
@@ -58,6 +59,9 @@ public class BoardExample {
     BoardManager.getInstance().insertboard(board);
   }
 
+  /**
+   * 읽기 메뉴
+   */
   public void readMenu() {
     boolean isOn = true;
     while (isOn) {
@@ -93,7 +97,10 @@ public class BoardExample {
   }
 
 
-
+  /**
+   * 수정 메뉴
+   * 수정할 번호 bno
+   */
   public void updateMenu(int bno) {
     boolean isOn = true;
     while (isOn) {
@@ -121,20 +128,29 @@ public class BoardExample {
     }
   }
 
+  /**
+   * 삭제 메뉴
+   * 삭제할 번호 bno
+   */
   private void deleteMenu(int bno) {
 
     BoardManager.getInstance().deleteBoard(bno);
   }
 
+  /**
+   * 전체 삭제 메뉴
+   */
   public void clearMenu() {
     System.out.println("모든 정보를 삭제합니다.");
     BoardManager.getInstance().clearBoard();
   }
 
+  /** Json파일 생성 매뉴 */
   public void createJsonMenu() {
     BoardManager.getInstance().CreateJsonFile(BoardManager.getInstance().listAllBoard());
   }
 
+  /** board 정보 입력 */
   public Board inputDate(){
     String title = null;
     String content = null;

@@ -5,9 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import lombok.Setter;
-import m_Collection3_makeBoard_20240711.Board;
 
 @Setter
 public abstract class ObjectDBIO {
@@ -18,7 +16,7 @@ public abstract class ObjectDBIO {
   private String db_pwd = "mysql321";
 
 
-  //DB Connection
+  /** DB Connection */
   private boolean open() {
     try {
       Class.forName("com.mysql.cj.jdbc.Driver");
@@ -33,7 +31,7 @@ public abstract class ObjectDBIO {
     }
   }
 
-  //DB DisConnection
+  /**DB DisConnection */
   protected boolean close() {
     try {
       connection.close();
@@ -44,7 +42,11 @@ public abstract class ObjectDBIO {
     }
   }
 
-  //search
+  /**
+   * 명령어 처리
+   * 처리문 query
+   * 수정할 값 rs
+   */
   protected ResultSet excute(String query, ResultSet rs) {
     try {
       open();
@@ -56,7 +58,11 @@ public abstract class ObjectDBIO {
     return rs;
   }
 
-  protected void excute(String query) {
+  /**
+   * 명렁어 처리
+   * 처리문 query
+   */
+  protected void execute(String query) {
     try {
       open();
       PreparedStatement psmt = connection.prepareStatement(query);
@@ -66,6 +72,9 @@ public abstract class ObjectDBIO {
     }
   }
 
+  /**
+   * no 재설정
+   */
   protected void resetIndex() {
     try {
       //open();
@@ -83,8 +92,5 @@ public abstract class ObjectDBIO {
     }
   }
 
-  protected void CreateJsonFile(ArrayList<Board> boards) {
-
-  }
 
 }

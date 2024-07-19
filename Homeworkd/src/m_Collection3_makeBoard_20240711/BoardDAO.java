@@ -1,23 +1,20 @@
 package m_Collection3_makeBoard_20240711;
 
-import com.google.gson.JsonArray;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import m_Collection3_makeBoard_20240711.interfaces.BoardIO;
 import m_Collection3_makeBoard_20240711.lib.ObjectDBIO;
 import org.json.JSONObject;
 
 public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
 
+  /** board 추가 */
   @Override
   public void insertboard(Board board) {
     String title = board.getBtitle();
@@ -31,28 +28,40 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
         writer + "', '" +
         date + "' )";
 
-    super.excute(query);
+    super.execute(query);
     super.resetIndex();
     super.close();
   }
 
+  /**
+   * board 삭제
+   * 삭제할 번호 no
+   */
   @Override
   public void deleteBoard(int no) {
     String query = "DELETE FROM board WHERE no = " + no;
-    super.excute(query);
+    super.execute(query);
     super.resetIndex();
     super.close();
 
   }
 
+  /**
+   * 전체 삭제
+   */
   @Override
   public void clearBoard() {
     String query = "TRUNCATE TABLE board";
-    super.excute(query);
+    super.execute(query);
     super.resetIndex();
     super.close();
   }
 
+  /**
+   * board 검색
+   * 읽을 board 번호 no
+   * @return board
+   */
   @Override
   public Board searchBoard(int no) {
     String query = "SELECT * FROM board WHERE no = " + no;
@@ -76,6 +85,10 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
     return board;
   }
 
+  /**
+   * board list 전체 조회
+   * @return ArrayList
+   */
   @Override
   public ArrayList<Board> listAllBoard() {
     String query = "SELECT * FROM board";
@@ -100,6 +113,11 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
     return templist;
   }
 
+  /**
+   * board 수정
+   * 수정할 board번호 no
+   * 수정할 board board
+   */
   @Override
   public void updateBoard(int no, Board board) {
     String query = "UPDATE board SET title = '" + board.getBtitle()
@@ -107,11 +125,14 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
         + "', writer = '" + board.getBwriter() + "' "
         + "WHERE no = " + no;
     ResultSet rs = null;
-    super.excute(query);
+    super.execute(query);
     super.close();
 
   }
 
+  /**
+   * board List 전체 출력
+   */
   public void printBoard() {
     listAllBoard().forEach(no -> {
       System.out.printf("%d%10s%20s%20s\n", no.getBno(), no.getBwriter(), no.getStringDate(),
@@ -119,6 +140,10 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
     });
   }
 
+  /**
+   * Json파일 생성
+   * 생성할 board List boards
+   */
   @Override
   public void CreateJsonFile(ArrayList<Board> boards) {
     JSONObject jsonObject = new JSONObject();
