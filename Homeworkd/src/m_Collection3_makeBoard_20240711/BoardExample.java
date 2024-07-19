@@ -1,35 +1,33 @@
 package m_Collection3_makeBoard_20240711;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BoardExample {
 
   public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args)  {
     BoardExample be = new BoardExample();
 
     be.mainMenu();
 
-    br.close();
+
 
   }
 
-  public void mainMenu() throws IOException {
+  public void mainMenu(){
     int selectMenu = 0;
     boolean isOn = true;
 
     while (isOn) {
       System.out.println("[게시물 목록]");
       System.out.println("-------------------------------------------------------------");
-      System.out.printf("no\t\t\twriter\t\t\tdate\t\t\ttitle\n");
+      System.out.println("no\t\t\twriter\t\t\tdate\t\t\ttitle");
       System.out.println("-------------------------------------------------------------");
       BoardManager.getInstance().printBoard();
       System.out.println("-------------------------------------------------------------");
       System.out.println("메인 메뉴 : 1.Create | 2.Read | 3.Clear | 4.EXit | 5.Json 생성");
-      System.out.printf("메뉴 선택 : ");
+      System.out.print("메뉴 선택 : ");
       try {
         selectMenu = Integer.parseInt(br.readLine());
         switch (selectMenu) {
@@ -38,6 +36,7 @@ public class BoardExample {
           case 3 -> clearMenu();
           case 4 -> {
             System.out.println("** 게시판 종료 **");
+            br.close();
             isOn = false;
           }
           case 5 -> createJsonMenu();
@@ -46,25 +45,20 @@ public class BoardExample {
       } catch (NumberFormatException e) {
         System.err.println(e.getMessage());
         System.out.println("입력 범위를 벗어났습니다. 다시 입력하여 주세요");
+      }catch (IOException e) {
+        System.err.println(e.getMessage());
       }
     }
   }
 
-  public void createMenu() throws IOException {
-    //List<String> list = new ArrayList<>();
+  public void createMenu(){
     System.out.println("[새 게시물 입력]");
-/*    System.out.printf("제목 : ");
-    list.add(br.readLine());
-    System.out.printf("내용 : ");
-    list.add(br.readLine());
-    System.out.printf("작성자 : ");
-    list.add(br.readLine());*/
 
     Board board = inputDate();
     BoardManager.getInstance().insertboard(board);
   }
 
-  public void readMenu() throws IOException {
+  public void readMenu() {
     boolean isOn = true;
     while (isOn) {
       try {
@@ -73,9 +67,7 @@ public class BoardExample {
         int bno = Integer.parseInt(br.readLine());
         System.out.println("####################");
         Board board = BoardManager.getInstance().searchBoard(bno);
-        if(board.getBtitle() == null) {
-          throw new NumberFormatException();
-        }
+
         System.out.println(board.toString());
         int selectnum = 0;
         System.out.println("-----------------------------");
@@ -94,22 +86,18 @@ public class BoardExample {
       } catch (NumberFormatException e) {
         System.err.println(e.getMessage());
         System.out.println("입력 범위를 벗어났습니다. 다시 입력하여 주세요");
+      } catch (IOException e) {
+        System.err.println(e.getMessage());
       }
     }
   }
 
 
 
-  public void updateMenu(int bno) throws IOException {
+  public void updateMenu(int bno) {
     boolean isOn = true;
     while (isOn) {
       System.out.println("[수정 내용 입력]");
-      /*System.out.print("제목 : ");
-      String title = br.readLine();
-      System.out.print("내용 : ");
-      String content = br.readLine();
-      System.out.print("작성자 : ");
-      String writer = br.readLine();*/
       Board board = inputDate();
       System.out.println("-----------------------------");
       System.out.println("보조 메뉴 : 1.Ok | 2.Cancel");
@@ -127,6 +115,8 @@ public class BoardExample {
       } catch (NumberFormatException e) {
         System.err.println(e.getMessage());
         System.out.println("입력 범위를 벗어났습니다. 다시 입력하여 주세요");
+      }catch (IOException e) {
+        System.err.println(e.getMessage());
       }
     }
   }
@@ -145,13 +135,20 @@ public class BoardExample {
     BoardManager.getInstance().CreateJsonFile(BoardManager.getInstance().listAllBoard());
   }
 
-  public Board inputDate() throws IOException{
-    System.out.print("제목 : ");
-    String title = br.readLine();
-    System.out.print("내용 : ");
-    String content = br.readLine();
-    System.out.print("작성자 : ");
-    String writer = br.readLine();
+  public Board inputDate(){
+    String title = null;
+    String content = null;
+    String writer = null;
+    try {
+      System.out.print("제목 : ");
+      title = br.readLine();
+      System.out.print("내용 : ");
+      content = br.readLine();
+      System.out.print("작성자 : ");
+      writer = br.readLine();
+    } catch (IOException e) {
+      System.err.println(e.getMessage());
+    }
 
     return new Board(title, content, writer);
   }
