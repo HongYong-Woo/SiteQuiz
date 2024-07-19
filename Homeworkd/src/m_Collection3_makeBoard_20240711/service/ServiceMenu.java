@@ -1,9 +1,9 @@
-package m_Collection3_makeBoard_20240711.Service;
+package m_Collection3_makeBoard_20240711.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import m_Collection3_makeBoard_20240711.DAO.BoardDAO;
-import m_Collection3_makeBoard_20240711.VO.Board;
+import m_Collection3_makeBoard_20240711.dao.BoardDAO;
+import m_Collection3_makeBoard_20240711.vo.Board;
 
 public abstract class ServiceMenu extends BoardDAO {
 

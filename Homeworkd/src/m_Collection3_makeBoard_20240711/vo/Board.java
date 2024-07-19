@@ -1,4 +1,4 @@
-package m_Collection3_makeBoard_20240711.VO;
+package m_Collection3_makeBoard_20240711.vo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

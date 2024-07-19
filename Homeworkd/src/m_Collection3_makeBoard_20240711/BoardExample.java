@@ -1,8 +1,7 @@
 package m_Collection3_makeBoard_20240711;
 
 import java.io.*;
-import m_Collection3_makeBoard_20240711.Service.BoardManager;
-import m_Collection3_makeBoard_20240711.Service.ServiceMenu;
+import m_Collection3_makeBoard_20240711.service.BoardManager;
 
 
 public class BoardExample {
