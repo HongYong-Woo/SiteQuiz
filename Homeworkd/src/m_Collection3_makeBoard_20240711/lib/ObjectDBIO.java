@@ -1,29 +1,34 @@
 package m_Collection3_makeBoard_20240711.lib;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 import lombok.Setter;
 
 @Setter
 public abstract class ObjectDBIO {
 
   private Connection connection = null;
-  private String db_url = "jdbc:mysql://localhost:3306/employees";
-  private String db_id = "root";
-  private String db_pwd = "mysql321";
+  private Properties Info = new Properties();
 
 
   /** DB Connection */
   private boolean open() {
     try {
-      Class.forName("com.mysql.cj.jdbc.Driver");
-      connection = DriverManager.getConnection(db_url, db_id, db_pwd);
+      Info.load(ObjectDBIO.class.getResourceAsStream("../VO./DB_LoginInfo.properties"));
+      Class.forName(Info.getProperty("driver"));
+      connection = DriverManager.getConnection(Info.getProperty("url"), Info.getProperty("username"), Info.getProperty("password"));
       return true;
+    }catch (IOException e) {
+      System.err.println(e.getMessage());
+      return false;
     } catch (ClassNotFoundException e) {
       System.err.println(e.getMessage());
+      System.out.println("연결 실패!");
       return false;
     } catch (SQLException e) {
       System.err.println(e.getMessage());

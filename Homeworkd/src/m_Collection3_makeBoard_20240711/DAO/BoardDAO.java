@@ -1,4 +1,4 @@
-package m_Collection3_makeBoard_20240711;
+package m_Collection3_makeBoard_20240711.DAO;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import m_Collection3_makeBoard_20240711.VO.Board;
 import m_Collection3_makeBoard_20240711.interfaces.BoardIO;
 import m_Collection3_makeBoard_20240711.lib.ObjectDBIO;
 import org.json.JSONObject;

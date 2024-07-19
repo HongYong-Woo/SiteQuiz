@@ -1,15 +1,13 @@
-package m_Collection3_makeBoard_20240711;
+package m_Collection3_makeBoard_20240711.VO;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 
 @Getter
 @Setter
-
 public class Board {
   private int bno;
   private String btitle;
@@ -18,10 +16,10 @@ public class Board {
   private LocalDate date;
   private String stringDate;
 
-  Board(){}
+  public Board(){}
 
   //생성, 업데이트에 쓰임
-  Board(String title, String content, String writer) {
+  public Board(String title, String content, String writer) {
     this.btitle = title;
     this.bcontent = content;
     this.bwriter = writer;
@@ -31,7 +29,7 @@ public class Board {
   }
   
   //조회에 쓰임
-  Board(int no, String title, String content, String writer, LocalDate date) {
+  public Board(int no, String title, String content, String writer, LocalDate date) {
     this.bno = no;
     this.btitle = title;
     this.bcontent = content;
