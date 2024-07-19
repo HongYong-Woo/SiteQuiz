@@ -20,15 +20,15 @@ public class BoardExample {
   public void mainMenu() throws IOException {
     int selectMenu = 0;
     boolean isOn = true;
-    List<Board> temp = new ArrayList<>();
+
     while (isOn) {
       System.out.println("[게시물 목록]");
-      System.out.println("------------------------------------------------------");
+      System.out.println("-------------------------------------------------------------");
       System.out.printf("no\t\t\twriter\t\t\tdate\t\t\ttitle\n");
-      System.out.println("------------------------------------------------------");
+      System.out.println("-------------------------------------------------------------");
       BoardManager.getInstance().printBoard();
-      System.out.println("------------------------------------------------------");
-      System.out.println("메인 메누 : 1.Create | 2.Read | 3.Clear | 4.EXit | 5.Json파일 생성");
+      System.out.println("-------------------------------------------------------------");
+      System.out.println("메인 메뉴 : 1.Create | 2.Read | 3.Clear | 4.EXit | 5.Json 생성");
       System.out.printf("메뉴 선택 : ");
       try {
         selectMenu = Integer.parseInt(br.readLine());
@@ -41,11 +41,11 @@ public class BoardExample {
             isOn = false;
           }
           case 5 -> createJsonMenu();
-          default -> System.out.println("범위를 벗어났습니다. 다시 입력하여 주세요");
+          default -> throw new NumberFormatException();
         }
       } catch (NumberFormatException e) {
         System.err.println(e.getMessage());
-        System.out.println("숫자를 입력하여 주십시오");
+        System.out.println("입력 범위를 벗어났습니다. 다시 입력하여 주세요");
       }
     }
   }
@@ -121,12 +121,12 @@ public class BoardExample {
             isOn = false;
           }
           case 2 -> isOn = false;
-          default -> System.out.println("범위를 벗어났습니다. 다시 입력하여 주세요");
+          default -> throw new NumberFormatException();
         }
 
       } catch (NumberFormatException e) {
         System.err.println(e.getMessage());
-        System.out.println("숫자를 입력하여 주십시오");
+        System.out.println("입력 범위를 벗어났습니다. 다시 입력하여 주세요");
       }
     }
   }
