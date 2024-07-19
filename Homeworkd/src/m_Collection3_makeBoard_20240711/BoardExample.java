@@ -5,7 +5,6 @@ import m_Collection3_makeBoard_20240711.service.BoardManager;
 
 
 public class BoardExample {
-
   public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
   public static void main(String[] args) {
