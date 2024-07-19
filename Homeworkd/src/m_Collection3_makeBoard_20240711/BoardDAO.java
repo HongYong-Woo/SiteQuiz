@@ -1,5 +1,11 @@
 package m_Collection3_makeBoard_20240711;
 
+import com.google.gson.JsonArray;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import m_Collection3_makeBoard_20240711.interfaces.BoardIO;
 import m_Collection3_makeBoard_20240711.lib.ObjectDBIO;
+import org.json.JSONObject;
 
 public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
 
@@ -110,6 +117,22 @@ public abstract class BoardDAO extends ObjectDBIO implements BoardIO {
       System.out.printf("%d%10s%20s%20s\n", no.getBno(), no.getBwriter(), no.getStringDate(),
           no.getBtitle());
     });
+  }
 
+  @Override
+  public void CreateJsonFile(ArrayList<Board> boards) {
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("boards", boards);
+
+    try {
+      Writer writer = new FileWriter("C:/Study/boards.json", StandardCharsets.UTF_8);
+      String stringJson = jsonObject.toString();
+      writer.write(stringJson);
+      System.out.println("파일 생성이 완료 되었습니다.");
+      writer.flush();
+      writer.close();
+    } catch (IOException e) {
+      System.err.println(e.getMessage());
+    }
   }
 }

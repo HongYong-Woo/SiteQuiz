@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import lombok.Setter;
+import m_Collection3_makeBoard_20240711.Board;
 
 @Setter
 public abstract class ObjectDBIO {
@@ -79,6 +81,10 @@ public abstract class ObjectDBIO {
     } catch (SQLException e) {
       System.err.println(e.getMessage());
     }
+  }
+
+  protected void CreateJsonFile(ArrayList<Board> boards) {
+
   }
 
 }

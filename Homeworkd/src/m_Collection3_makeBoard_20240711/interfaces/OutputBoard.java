@@ -5,4 +5,5 @@ import m_Collection3_makeBoard_20240711.Board;
 
 public interface OutputBoard {
   public ArrayList<Board> listAllBoard();
+  public void CreateJsonFile(ArrayList<Board> boards);
 }
